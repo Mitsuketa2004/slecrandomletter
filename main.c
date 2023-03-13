@@ -43,6 +43,7 @@ void enterstr(){
 
 int main(){
 	srand(time(NULL));
+	printf("Enter a phrase or a word, limit 100 char's")
 	enterstr();
 	int mainStrsze = strlen(mainstr);
 	char *strbuf = malloc(mainStrsze * sizeof(char*));
