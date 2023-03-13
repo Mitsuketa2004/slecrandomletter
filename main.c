@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
-char mainstr[] = "lelé da cuca";
-int mainStrsze = sizeof(mainstr);	
+char *mainstr, *enredstr;
+
 
 void createRandomL(char *letter){
 	for(int i = 0; i <= 1 ; i++){
@@ -18,28 +18,34 @@ void createRandomL(char *letter){
 }
 
 int checkStr(char *str1,char  *str2){
-	for (int i = 0; i < mainStrsze; i++){
+	for (int i = 0; i < strlen(str1); i++){
 		if (str1[i] != str2[i] ){			
 			return 1;
 		}
 	}
 	return 0;
 }
-/**void enterstr(){
-	char *enredstr = malloc(1000000);
-	printf("entered input = %s \nsize = %d", enredstr, sizeof(enredstr));
-	if(fgets (enredstr, 5, stdin) != NULL){
-		printf("entered input = %s \nsize = %d", enredstr, strlen(enredstr));
+
+void enterstr(){
+	enredstr = malloc(100 * sizeof(char*));
+	if(fgets (enredstr, 100, stdin) != NULL){
+		int enredlen = strlen(enredstr);
+		int i = 0;
+		enredstr[enredlen-1] = '\0';
+		mainstr = malloc (enredlen * sizeof(char*));
+		strcpy(mainstr, enredstr);
+		printf("%s", mainstr);
 	}else{
-		printf("Error, enter a phrase please!");
+		printf("Error, enter a phrase please!\n");
 		enterstr();
 	}
-}**/
+}
 
 int main(){
 	srand(time(NULL));
-	//enterstr();
-	char *strbuf = malloc((mainStrsze) * sizeof(char));
+	enterstr();
+	int mainStrsze = strlen(mainstr);
+	char *strbuf = malloc(mainStrsze * sizeof(char*));
 	while(checkStr(mainstr, strbuf) == 1){
 		int i = 0;
 		for (i = 0; i < mainStrsze; i++){
